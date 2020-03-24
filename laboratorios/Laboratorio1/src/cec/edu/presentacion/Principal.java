@@ -3,6 +3,7 @@ package cec.edu.presentacion;
 import java.util.Scanner;
 
 import cec.edu.negocio.Ahorros;
+import cec.edu.negocio.CargaMasiva;
 import cec.edu.negocio.Corriente;
 import cec.edu.negocio.Servicio;
 
@@ -21,6 +22,29 @@ public class Principal {
 	 * @author leninml
 	 * 
 	 */
+	/**
+	 * Simulacion de Cuentas por arreglos
+	 */
+	private Corriente[] arregloCorriente; // corchetes = arreglo
+	private Ahorros[] arregloAhorros;
+	private Servicio[] arregloServicios;
+
+	/**
+	 * Inicializacion de cuentas de Ahorro
+	 */
+	public Principal() {
+		// El constructor es primer metodo que se ejecuta
+		arregloAhorros = new Ahorros[100];
+		arregloCorriente = new Corriente[100];
+		arregloServicios = new Servicio[100];
+	}
+	
+	private void cargarDatos() {
+		CargaMasiva cargaMasiva = new CargaMasiva();
+		arregloAhorros = cargaMasiva.cargarAhorro(arregloAhorros);
+		arregloCorriente = cargaMasiva.cargarCorriente(arregloCorriente);
+	}
+
 	private void subMenuAhorros() {
 		/**
 		 * 
@@ -84,6 +108,27 @@ public class Principal {
 			}
 
 		} while (opcionIngresada != 3);
+	}
+
+	private float operacionCuenta(String operacionEntrada, String numeroCuenta, float valorProcesar) {
+		Ahorros cuentaEncontrada;
+		float saldoCuenta = 0;
+		boolean banderaDeposito = false;
+		if (operacionEntrada.equals("1")) {
+			// Ejecutar Deposito
+			for (int i = 0; i < arregloAhorros.length; i++) {
+				if (numeroCuenta.equals(arregloAhorros[i].getNumeroCuenta())) {
+					cuentaEncontrada = arregloAhorros[i];
+					saldoCuenta = cuentaEncontrada.depositoCuenta(valorProcesar);
+					banderaDeposito = true;
+					break;
+				}
+			}
+			if (!banderaDeposito) {
+				System.err.println("\t\t\t******ERROR NUMERO DE CUENTA NO EXISTE ******");
+			}
+		}
+		return saldoCuenta;
 	}
 
 	private void menuPrincipal() {
