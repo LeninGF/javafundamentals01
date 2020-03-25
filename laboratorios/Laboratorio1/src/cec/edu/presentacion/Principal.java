@@ -38,18 +38,20 @@ public class Principal {
 		arregloCorriente = new Corriente[100];
 		arregloServicios = new Servicio[100];
 	}
-	
+
 	private void cargarDatos() {
 		CargaMasiva cargaMasiva = new CargaMasiva();
 		arregloAhorros = cargaMasiva.cargarAhorro(arregloAhorros);
 		arregloCorriente = cargaMasiva.cargarCorriente(arregloCorriente);
 	}
 
+	/**
+	 * subMenuAhorros: trabajo lo de ahorros
+	 */
 	private void subMenuAhorros() {
-		/**
-		 * 
-		 */
 		int opcionIngresada = 0;
+		float saldoCuenta = 0, depositoRealizar = 0;
+		String numeroCuentaBuscar, depositoRealizarString;
 		do {
 			System.out.println("Menu de Ahorros");
 			System.out.println("1.- Deposito");
@@ -60,7 +62,17 @@ public class Principal {
 			opcionIngresada = scanner2.nextInt();
 			switch (opcionIngresada) {
 			case 1: {
-
+				System.out.println("\t\t Ingrese el numero de cuenta: ");
+				numeroCuentaBuscar = scanner2.next(); // lee la cadena desde teclado
+				System.out.println("\t\t Ingrese el valor a depositar");
+//				 === esta parte para cuando hay problemas al ingresar el punto decimal, en linux no me da ese problema ==="
+//				depositoRealizarString =  scanner2.next().replace(",", ".");
+//				depositoRealizar = Float.parseFloat(depositoRealizarString);
+				
+				depositoRealizar = scanner2.nextFloat();
+				saldoCuenta = operacionCuenta("1", numeroCuentaBuscar, depositoRealizar);
+				if (saldoCuenta >0)
+					System.out.println("\t\t Nuevo saldo de cuenta "+numeroCuentaBuscar+" es: $"+ String.format("%.2f", saldoCuenta));
 				break;
 			}
 			case 2:
@@ -144,7 +156,7 @@ public class Principal {
 			System.out.println("Selecciona un número de acuerdo a la transacción a realizar");
 			System.out.println("1.- Cuentas de Ahorro");
 			System.out.println("2.- Cuentas Corriente");
-			System.out.println("3.- Pagos de Servicios");
+			System.out.println("3.- Imprimir Cuentas");
 			System.out.println("4.- Salir");
 			System.out.println("\t\tSu opción actual es: " + opcionIngresada);
 			Scanner scanner = new Scanner(System.in); // inicializa un objeto Scanner para leer entradas teclado
@@ -153,7 +165,7 @@ public class Principal {
 			switch (opcionIngresada) {
 			case 1: {
 
-				this.subMenuAhorros();
+				subMenuAhorros();
 				break;
 			}
 			case 2: {
@@ -161,7 +173,18 @@ public class Principal {
 				break;
 			}
 			case 3: {
-				System.out.println("hola 3 ");
+				System.out.println("Cuentas de Ahorro: ");
+				for (int i = 0; i < arregloAhorros.length; i++) {
+					System.out.print("\t" + arregloAhorros[i].getNumeroCuenta() + "($"
+							+ arregloAhorros[i].getSaldoCuenta() + ")");
+				}
+
+				System.out.println("\nCuentas Corriente: ");
+				for (Corriente cuentaCorriente : arregloCorriente) {
+					System.out.print(
+							"\t" + cuentaCorriente.getNumeroCuenta() + "($" + cuentaCorriente.getSaldoCuenta() + ")");
+				}
+
 				break;
 			}
 			case 4: {
@@ -192,7 +215,7 @@ public class Principal {
 //		System.out.println("Saldo actual: "+ahorros.getSaldoCuenta());
 
 		Principal principal = new Principal();
-
+		principal.cargarDatos();
 		principal.menuPrincipal();
 
 	}
