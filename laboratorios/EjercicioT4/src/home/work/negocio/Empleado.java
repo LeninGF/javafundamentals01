@@ -1,27 +1,36 @@
 package home.work.negocio;
-
+/**
+ * Clase empleado que contiene atributos
+ * dni
+ * nombre
+ * apellido
+ * @author leninml
+ *
+ */
 public class Empleado {
-	/**
-	 * Clase Empleado que contiene atributos como
-	 * dni: numero de identificacion
-	 * nombre, apellido: nombres de nacimienito de ciudadano
-	 * fechaContratacion: fecha de ingreso y contrato en el trabako
-	 * @author leninml
-	 * 
-	 */
-	private String dni;
+	
+	private String identificacion;
 	private String nombre;
 	private String apellido;
 	private String domicilio;
 	private String codigoPostal;
 	private String ciudad;
 	// atributo puestoTrabajo de la clase PuestoTrabajo
-	private PuestoTrabajo puestoTrabajo; // debo usar el modificador de acceso???
+	protected PuestoTrabajo puestoTrabajo; // 
 	
-	// Constructor
-	public Empleado(String dni, String nombre, String apellido, String domicilio, String codigoPostal, String ciudad,
-			PuestoTrabajo puestoTrabajo) {
-		this.dni = dni;
+	/**
+	 * Constructor de la clase Empleado
+	 * @param identificacion: número de identificación del empleado
+	 * @param nombre: un string representando el nombre
+	 * @param apellido
+	 * @param domicilio
+	 * @param codigoPostal
+	 * @param ciudad
+	 * @param puestoTrabajo
+	 */
+	public Empleado(String identificacion, String nombre, String apellido, String domicilio, String codigoPostal,
+			String ciudad, PuestoTrabajo puestoTrabajo) {
+		this.identificacion = identificacion;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.domicilio = domicilio;
@@ -29,13 +38,21 @@ public class Empleado {
 		this.ciudad = ciudad;
 		this.puestoTrabajo = puestoTrabajo;
 	}
-
-	public String getDni() {
-		return dni;
+	/**
+	 * Metodo que devuelve la descripcion del puesto de trabajo
+	 * @return: devuelve la descripcion del puesto de trabajo
+	 */
+	public String getAtributos() {
+		return puestoTrabajo.getDescription();
 	}
 
-	public void setDni(String dni) {
-		this.dni = dni;
+	public String getIdentificacion() {
+		return identificacion;
+	}
+
+
+	public void setIdentificacion(String identificacion) {
+		this.identificacion = identificacion;
 	}
 
 	public String getNombre() {
@@ -85,7 +102,8 @@ public class Empleado {
 	public void setPuestoTrabajo(PuestoTrabajo puestoTrabajo) {
 		this.puestoTrabajo = puestoTrabajo;
 	}
-	
+
+		
 	
 	
 
