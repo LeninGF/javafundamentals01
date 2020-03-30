@@ -1,12 +1,11 @@
 package cec.epn.presentation;
 
-import cec.epn.negocio.Calculator;
-import cec.epn.negocio.PrimeNumber;
-import cec.epn.negocio.SecondDegreeEquation;
-import cec.epn.negocio.VowelCounter;
+import cec.epn.negocio.*;
 
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Main {
@@ -16,14 +15,15 @@ public class Main {
             System.out.println("Main Menu");
             System.out.println("1. Second Degree Equation Solver");
             System.out.println("2. Vowel Counter");
-            System.out.println("3. Prime Number");
-            System.out.println("4. Calculator");
-            System.out.println("5. Exit");
+            System.out.println("3. Vowel Counter with Regex");
+            System.out.println("4. Prime Number");
+            System.out.println("5. Calculator");
+            System.out.println("6. Exit");
             System.out.print("Make your choice: ");
             Scanner scanner = new Scanner(System.in);
             choice = scanner.nextInt();
-            System.out.println("You chose: "+choice);
-            switch (choice){
+            System.out.println("You chose: " + choice);
+            switch (choice) {
                 case 1:
                     secondDegreeProgram();
                     break;
@@ -31,19 +31,22 @@ public class Main {
                     vowelCounterProgram();
                     break;
                 case 3:
-                    primeIdProgram();
+                    vowelCounterRegexProgram();
                     break;
                 case 4:
-                    calculatorProg();
+                    primeIdProgram();
                     break;
                 case 5:
+                    calculatorProg();
+                    break;
+                case 6:
                     System.out.println("Exiting application");
                     break;
                 default:
                     System.out.println("Wrong Choice Try Again");
                     break;
             }
-        } while (choice != 5);
+        } while (choice != 6);
 
     }
 
@@ -75,32 +78,41 @@ public class Main {
 
     }
 
-    private void vowelCounterProgram(){
-        String text_in = "La lluvia en Sevilla es una maravilla";
-        int numberVowels =0;
-        VowelCounter vowelCounter = new VowelCounter(text_in);
+    private void vowelCounterProgram() {
+        final String textIn = "La lluvia en Sevilla es una maravilla";
+        int numberVowels = 0;
+        VowelCounter vowelCounter = new VowelCounter(textIn);
         numberVowels = vowelCounter.counter();
-        System.out.println(text_in+" has "+ numberVowels + " vowels");
+        System.out.println(textIn + " has " + numberVowels + " vowels");
     }
 
-    private void primeIdProgram(){
+    private void vowelCounterRegexProgram() {
+        System.out.print("Write a sentence to count its vowels: ");
+        Scanner scan = new Scanner(System.in);
+        String textIn = scan.nextLine();
+        int numberVowels = 0;
+        VowelCounterRegex countingVowels = new VowelCounterRegex(textIn);
+        numberVowels = countingVowels.vowelCount();
+        System.out.println(textIn + " has " + numberVowels + " vowels");
+    }
+
+    private void primeIdProgram() {
         boolean result;
         System.out.print("Input an integer number: ");
         Scanner scanner = new Scanner(System.in);
         int data = scanner.nextInt();
         PrimeNumber primeNumber = new PrimeNumber(data);
         result = primeNumber.isPrime();
-        if (result==true){
-            System.out.println("\nNumber "+data+" is Prime");
-        }
-        else{
-            System.out.println("\nNumber "+data+" is Not Prime");
+        if (result) {
+            System.out.println("\nNumber " + data + " is Prime");
+        } else {
+            System.out.println("\nNumber " + data + " is Not Prime");
         }
 
 
     }
 
-    private void calculatorProg(){
+    private void calculatorProg() {
         System.out.println("Program Arithmetic Operations");
         System.out.print("Please select an operation: +, -, *, ^, %: ");
         Scanner scanner = new Scanner(System.in);
@@ -111,7 +123,7 @@ public class Main {
         int num2 = scanner.nextInt();
         Calculator calculator = new Calculator(operation, num1, num2);
         double result = calculator.arithmeticOper();
-        System.out.println(num1+" "+operation+" "+num2+" = "+result);
+        System.out.println(num1 + " " + operation + " " + num2 + " = " + result);
 
     }
 

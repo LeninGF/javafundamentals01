@@ -3,6 +3,7 @@ package cec.epn.negocio;
 /**
  * Second Degree Class
  * This class solves the traditional equation ax^2+bx+c=0
+ *
  * @author Lenin
  * @version 1.0.1
  */
@@ -17,16 +18,15 @@ public class SecondDegreeEquation {
         this.c = c;
     }
 
-    public double[] solveSecondDegEq(){
-        double []roots = new double[2];
+    public double[] solveSecondDegEq() {
+        double[] roots = new double[2];
         double x1, x2;
-        double discriminant = Math.pow(b,2)-4*a*c;
-        if (discriminant>=0){
+        double discriminant = Math.pow(b, 2) - 4 * a * c;
+        if (discriminant >= 0) {
             // calculate roots
-            x1 = -b/(2*a)+Math.sqrt(discriminant)/(2*a);
-            x2 = -b/(2*a)-Math.sqrt(discriminant)/(2*a);
-        }
-        else{
+            x1 = -b / (2 * a) + Math.sqrt(discriminant) / (2 * a);
+            x2 = -b / (2 * a) - Math.sqrt(discriminant) / (2 * a);
+        } else {
             // set error value
             x1 = -999;
             x2 = -999;

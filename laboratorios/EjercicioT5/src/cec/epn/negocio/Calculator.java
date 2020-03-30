@@ -3,63 +3,62 @@ package cec.epn.negocio;
 public class Calculator {
     String operator;
     int number1, number2;
-    private double addOp(){
-        return number1+number2;
+
+    private double addOp() {
+        return number1 + number2;
     }
 
-    private double restOp(){
-        return number1-number2;
+    private double restOp() {
+        return number1 - number2;
     }
 
-    private double prodOp(){
-        return number1*number2;
+    private double prodOp() {
+        return number1 * number2;
     }
 
-    private double divOp(){
+    private double divOp() {
         double result;
-        if (number2!=0){
-            result = number1/number2;
-        }
-        else{
+        if (number2 != 0) {
+            result = number1 / number2;
+        } else {
             result = -999;
         }
         return result;
     }
 
-    private double expOp(){
+    private double expOp() {
         return Math.pow(number1, number2);
     }
 
-    private double moduleOp(){
+    private double moduleOp() {
         double result;
-        if(number2!=0){
-            result = number1%number2;
-        }
-        else{
+        if (number2 != 0) {
+            result = number1 % number2;
+        } else {
             result = -999;
         }
         return result;
     }
 
-    public double arithmeticOper(){
+    public double arithmeticOper() {
         double result;
-        switch (operator){
+        switch (operator) {
             case "+":
-                result=addOp();
+                result = addOp();
                 break;
             case "-":
-                result=restOp();
+                result = restOp();
                 break;
             case "*":
-                result=prodOp();
+                result = prodOp();
                 break;
             case "/":
-                result=divOp();
+                result = divOp();
             case "^":
-                result=expOp();
+                result = expOp();
                 break;
             case "%":
-                result=moduleOp();
+                result = moduleOp();
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + operator);
