@@ -11,7 +11,12 @@ import cec.epn.negocio.Estudiante;
 import cec.epn.negocio.Profesor;
 
 public class Principal {
-
+	/**
+	 * Metodo para convertir una String en formato yyyy-MM-dd a una Fecha Date
+	 * 
+	 * @param dateStr: String con la fecha en "yyyy-MM-dd"
+	 * @return: Fecha en tipo de dato Date
+	 */
 	private Date str2Date(String dateStr) {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date myBDay = null;
@@ -24,6 +29,11 @@ public class Principal {
 		return myBDay;
 	}
 
+	/**
+	 * Metodo Principal para Correr en Consola
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Principal princ = new Principal();

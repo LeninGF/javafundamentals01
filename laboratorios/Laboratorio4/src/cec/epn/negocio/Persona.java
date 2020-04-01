@@ -5,14 +5,31 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Clase Padre Persona
+ * 
+ * @author leninml
+ *
+ */
 public abstract class Persona {
 	protected String identificiacion;
 	protected String nombres;
 	protected String direccion;
 	protected Date fechaNacimiento;
 
+	/**
+	 * Declaración de método abstracto para calcular impuesto a la renta en
+	 * subclases
+	 * 
+	 * @return
+	 */
 	public abstract float calcularImpuestoRenta();
 
+	/**
+	 * Determina la Edad de la persona en función del año de nacimiento
+	 * 
+	 * @return valor entero correspondiente a la edad
+	 */
 	public int calcularEdad() {
 		int currentYear = Year.now().getValue();
 		int yearBirth = getYearFromDate(this.fechaNacimiento);
@@ -20,6 +37,12 @@ public abstract class Persona {
 		return age;
 	}
 
+	/**
+	 * Método que permite extraer el año desde una fecha en formato Date
+	 * 
+	 * @param date: fecha de nacimiento en formato Date
+	 * @return: devuelve un entero con los digitos del año
+	 */
 	private int getYearFromDate(Date date) {
 		int year = 0;
 		String dateStr = date.toString().replaceAll("\\s+", "");
@@ -33,6 +56,14 @@ public abstract class Persona {
 
 	}
 
+	/**
+	 * Constructor de Clase Padre Persona
+	 * 
+	 * @param identificiacion
+	 * @param nombres
+	 * @param direccion
+	 * @param fechaNacimiento: tipo Date
+	 */
 	public Persona(String identificiacion, String nombres, String direccion, Date fechaNacimiento) {
 
 		this.identificiacion = identificiacion;
